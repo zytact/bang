@@ -44226,15 +44226,6 @@ export const bangs = [
         u: 'http://gpsies.de/?q={{{s}}}',
     },
     {
-        c: 'Online Services',
-        d: 'www.google.pt',
-        r: 223,
-        s: 'Google PT',
-        sc: 'Google',
-        t: 'gpt',
-        u: 'https://www.google.pt/search?q={{{s}}}',
-    },
-    {
         c: 'News',
         d: 'www.greenpeace.org.uk',
         r: 0,

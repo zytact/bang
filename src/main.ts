@@ -46,6 +46,14 @@ function noSearchDefaultPageRender() {
     });
 }
 
+function seedBangMap() {
+    if (localStorage.getItem('bang-map')) return;
+    const map: Record<string, string> = {};
+    for (const b of bangs) map[b.t] = b.u;
+    localStorage.setItem('bang-map', JSON.stringify(map));
+}
+seedBangMap();
+
 const LS_DEFAULT_BANG = localStorage.getItem('default-bang') ?? 'g';
 const defaultBang = bangs.find((b) => b.t === LS_DEFAULT_BANG);
 

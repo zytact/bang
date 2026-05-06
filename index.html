@@ -31,7 +31,29 @@
             content="A better default search engine (with bangs!)"
         />
         <meta name="keywords" content="search, engine, bang, improved" />
-</head>
+        <script>
+            (function () {
+                var q = new URLSearchParams(window.location.search).get('q');
+                if (!q) return;
+                q = q.trim();
+                var match = q.match(/!(\S+)/i);
+                var bang = match ? match[1].toLowerCase() : null;
+                var stored = localStorage.getItem('bang-map');
+                if (!stored) return;
+                var map = JSON.parse(stored);
+                var defaultBang = localStorage.getItem('default-bang') || 'g';
+                var url = (bang && map[bang]) || map[defaultBang];
+                if (!url) return;
+                var clean = q.replace(/!\S+\s*/i, '').trim();
+                window.location.replace(
+                    url.replace(
+                        '{{{s}}}',
+                        encodeURIComponent(clean).replace(/%2F/g, '/')
+                    )
+                );
+            })();
+        </script>
+    </head>
     <body style="background-color: transparent">
         <div id="app"></div>
         <script type="module" src="/src/main.ts"></script>

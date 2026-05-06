@@ -8,7 +8,9 @@
         "build": "tsc && vite build",
         "preview": "vite preview",
         "lint": "eslint --ext .ts,.js .",
-        "format": "prettier --write ."
+        "format": "prettier --write .",
+        "typecheck": "tsc --noEmit",
+        "prepare": "husky"
     },
     "devDependencies": {
         "@eslint/js": "^9.21.0",
@@ -16,6 +18,8 @@
         "eslint-config-prettier": "^10.0.1",
         "eslint-plugin-prettier": "^5.2.3",
         "globals": "^16.0.0",
+        "husky": "^9.1.7",
+        "lint-staged": "^17.0.2",
         "prettier": "3.5.2",
         "typescript": "~5.7.2",
         "typescript-eslint": "^8.24.1",
@@ -23,5 +27,14 @@
     },
     "dependencies": {
         "vite-plugin-pwa": "^0.21.1"
+    },
+    "lint-staged": {
+        "*.{ts,js}": [
+            "eslint --fix",
+            "prettier --write"
+        ],
+        "*.{json,md,css,html}": [
+            "prettier --write"
+        ]
     }
 }

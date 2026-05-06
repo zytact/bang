@@ -46,7 +46,7 @@ function noSearchDefaultPageRender() {
     });
 }
 
-function seedBangMap() {
+export function seedBangMap() {
     if (localStorage.getItem('bang-map')) return;
     const map: Record<string, string> = {};
     for (const b of bangs) map[b.t] = b.u;
@@ -54,10 +54,10 @@ function seedBangMap() {
 }
 seedBangMap();
 
-const LS_DEFAULT_BANG = localStorage.getItem('default-bang') ?? 'g';
-const defaultBang = bangs.find((b) => b.t === LS_DEFAULT_BANG);
+export function getBangredirectUrl() {
+    const LS_DEFAULT_BANG = localStorage.getItem('default-bang') ?? 'g';
+    const defaultBang = bangs.find((b) => b.t === LS_DEFAULT_BANG);
 
-function getBangredirectUrl() {
     const url = new URL(window.location.href);
     const query = url.searchParams.get('q')?.trim() ?? '';
     if (!query) {
@@ -71,7 +71,6 @@ function getBangredirectUrl() {
     const selectedBang =
         bangs.find((b) => b.t === bangCandidate) ?? defaultBang;
 
-    // Remove the first bang from the query
     const cleanQuery = query.replace(/!\S+\s*/i, '').trim();
 
     // Format of the url is:
@@ -86,7 +85,7 @@ function getBangredirectUrl() {
     return searchUrl;
 }
 
-function doRedirect() {
+export function doRedirect() {
     const searchUrl = getBangredirectUrl();
     if (!searchUrl) return;
     window.location.replace(searchUrl);
